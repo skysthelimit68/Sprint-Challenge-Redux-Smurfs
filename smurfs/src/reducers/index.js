@@ -1,7 +1,5 @@
-/*
-  Be sure to import in all of the action types from `../actions`
-*/
-import { GET_SMURFS_START, GET_SMURFS_SUCCESS, GET_SMURFS_FAIL, ADD_SMURF_START, ADD_SMURF_SUCCESS, ADD_SMURF_FAIL } from "../actions"
+
+import { GET_SMURFS_START, GET_SMURFS_SUCCESS, GET_SMURFS_FAIL, ADD_SMURF_START, ADD_SMURF_SUCCESS, ADD_SMURF_FAIL, DELETE_SMURF_START, DELETE_SMURF_SUCCESS, DELETE_SMURF_FAIL } from "../actions"
 
 const initialState =
  {
@@ -60,6 +58,22 @@ const reducer = (state = initialState, action ) => {
         addingSmurf : false,
       }  
 
+      case DELETE_SMURF_START: 
+      return {
+        ...state,
+        deletingSmurf : true
+      }
+    case DELETE_SMURF_SUCCESS:
+      return {
+        ...state,
+        deletingSmurf : false,
+        smurfs : action.payload
+      }
+    case DELETE_SMURF_FAIL:
+      return {
+        ...state,
+        deletingSmurf : false,
+      }
     default:
     return state;
   }

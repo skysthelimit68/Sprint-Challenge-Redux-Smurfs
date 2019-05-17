@@ -41,6 +41,28 @@ export const addSmurf = newSmurf => dispatch => {
   )
 }
 
+export const DELETE_SMURF_START = "DELETE_SMURF_START";
+export const DELETE_SMURF_SUCCESS = "DELETE_SMURF_SUCCESS";
+export const DELETE_SMURF_FAIL = "DELETE_SMURF_FAIL";
+
+export const deleteSmurf = id => dispatch => {
+  dispatch( {type: DELETE_SMURF_START})
+  return(
+    axios
+    .delete(`http://localhost:3333/smurfs/${id}`)
+    .then( res => {
+      console.log(res)
+      dispatch({ type: DELETE_SMURF_SUCCESS, payload: res.data})
+    })
+    .catch( err => {
+      console.log(err)
+      dispatch({ type: DELETE_SMURF_FAIL, payload: err})
+    })
+  )
+}
+
+
+
 /* 
   Action Types Go Here!
   Be sure to export each action type so you can pull it into your reducer

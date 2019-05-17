@@ -11,7 +11,6 @@ class Smurfs extends React.Component {
 
     componentDidMount() {
         this.props.getSmurfs()
-        
     }
 
     render() {
