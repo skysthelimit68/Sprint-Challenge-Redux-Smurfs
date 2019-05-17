@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteSmurf} from "../actions";
-import { Button } from "reactstrap";
-
+import { Button, Toast, ToastBody, ToastHeader } from 'reactstrap';
 const Smurf = props => {
 
     const deleteSmurf = event => {
@@ -15,13 +14,17 @@ const Smurf = props => {
 
     return (
         <div>
-            <h4>{props.smurf.name}</h4>
-            <p>{props.smurf.age}</p>
-            <p>{props.smurf.height}</p>
-            <Button onClick={deleteSmurf}>Delete</Button>
-            <Link to={`/updateSmurf/${props.smurf.id}`}>
-                <Button>Update</Button>
-            </Link>
+            <Toast>
+                    <ToastHeader>{props.smurf.name}</ToastHeader>
+                    <ToastBody>
+                        <p>Age: {props.smurf.age}</p>
+                        <p>Height: {props.smurf.height}</p>
+                    </ToastBody>
+                    <Button onClick={deleteSmurf}>Delete</Button>
+                    <Link to={`/updateSmurf/${props.smurf.id}`}>
+                        <Button>Update</Button>
+                    </Link>
+            </Toast>
         </div>
     )
 }
