@@ -1,8 +1,50 @@
+
+import axios from "axios";
+
+export const GET_SMURFS_START = "GET_SMURFS_START";
+export const GET_SMURFS_SUCCESS = "GET_SMURFS_SUCCESS";
+export const GET_SMURFS_FAIL = "GET_SMURFS_FAIL";
+
+export const getSmurfs = () => dispatch => {
+  dispatch({ type : GET_SMURFS_START });
+  return(
+    axios
+  .get('http://localhost:3333/smurfs')
+  .then(res => {
+    console.log(res)
+    dispatch({ type : GET_SMURFS_SUCCESS, payload: res.data})
+  })
+  .catch(err => {
+    console.log(err)
+    dispatch({ type : GET_SMURFS_FAIL, payload : err})
+  })
+  )
+}
+
+export const ADD_SMURF_START = "ADD_SMURF_START";
+export const ADD_SMURF_SUCCESS = "ADD_SMURF_SUCCESS";
+export const ADD_SMURF_FAIL = "ADD_SMURF_FAIL";
+
+export const addSmurf = newSmurf => dispatch => {
+  dispatch({ type: ADD_SMURF_START })
+  return(
+    axios
+  .post('http://localhost:3333/smurfs', newSmurf)
+  .then(res => {
+    console.log(res)
+    dispatch({ type : ADD_SMURF_SUCCESS, payload: res.data})
+  })
+  .catch(err => {
+    console.log(err)
+    dispatch({ type : ADD_SMURF_FAIL, payload : err})
+  })
+  )
+}
+
 /* 
   Action Types Go Here!
   Be sure to export each action type so you can pull it into your reducer
 */
-
 /*
   For this project you'll need at least 2 action creators for the main portion,
    and 2 more for the stretch problem.
