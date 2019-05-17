@@ -13,8 +13,8 @@ const Smurf = props => {
 
 
     return (
-        <div>
-            <Toast>
+        <div className="p-3 bg-info my-2 rounded">
+                    <Toast>
                     <ToastHeader>{props.smurf.name}</ToastHeader>
                     <ToastBody>
                         <p>Age: {props.smurf.age}</p>
