@@ -15,7 +15,7 @@ class Smurfs extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className="smurfs-wrapper">
                 {this.props.smurfs.map(smurf => <Smurf smurf={smurf}/>)}
             </div>
         )

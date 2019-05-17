@@ -27,13 +27,12 @@ class App extends Component {
             <NavLink to="/">
               Smurf Village
             </NavLink>
-            <NavLink to="/smurf-form">
+            <NavLink to="/addSmurf">
               Add Smurf
             </NavLink>
           </nav>
         </header>
         <SmurfSlider />
-          <Link to="/addSmurf">Add Smurf</Link>
           <Route exact path="/" component={Smurfs} />
           <Route path="/addSmurf" component={SmurfForm} />
           <Route path="/updateSmurf/:id" component={SmurfForm} />
