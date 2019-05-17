@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input, Button } from "reactstrap";
 import { connect } from "react-redux";
-import { addSmurf } from "../actions";
+import { addSmurf, updateSmurf } from "../actions";
 
 
 class SmurfForm extends React.Component {
@@ -10,9 +10,24 @@ class SmurfForm extends React.Component {
         this.state = {
             name: "",
             age: "",
-            height:""
+            height:"", 
+            id: ""
         }
     }
+
+    componentDidMount() {
+        let activeSmurf = {}
+        if(this.props.match.params.id) {
+            activeSmurf = this.props.smurfs.find( smurf => smurf.id == this.props.match.params.id)
+            this.setState({
+                name: activeSmurf.name,
+                age: activeSmurf.age,
+                height: activeSmurf.height,
+                id: activeSmurf.id
+            })
+        }  
+    }
+
     updateField = event => {
         event.preventDefault();
         this.setState({
@@ -22,10 +37,18 @@ class SmurfForm extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.addSmurf({name:this.state.name, age: this.state.age, height: this.state.height})
-        .then(() => this.props.history.push('/'))
+        let id = this.props.match.params.id;
+        if(id) {
+            this.props.updateSmurf({name:this.state.name, age: this.state.age, height: this.state.height, id: this.state.id})
+            .then(() => this.props.history.push('/'))
+        } else {
+            this.props.addSmurf({name:this.state.name, age: this.state.age, height: this.state.height})
+            .then(() => this.props.history.push('/'))
+        }
+        
     }
 
+  
     render(){
         return(
             <div>
@@ -51,16 +74,18 @@ class SmurfForm extends React.Component {
                         onChange={this.updateField}
                         type="text"
                     />
-                    <Button type="submit">Add Smurf</Button>
+                    <Button>{`${this.props.match.params.id ? 'Update Smurf' : 'Add New Smurf'}`}</Button>                    
                 </Form>
             </div>
         )
     }
 }
 
-
+const mapStateToProps = state => ({
+    smurfs : state.smurfs
+})
 
 export default connect(
-    null, 
-    { addSmurf }
+    mapStateToProps, 
+    { addSmurf, updateSmurf }
 )(SmurfForm);

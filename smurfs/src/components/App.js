@@ -25,6 +25,7 @@ class App extends Component {
           <Link to="/addSmurf">Add Smurf</Link>
           <Route exact path="/" component={Smurfs} />
           <Route path="/addSmurf" component={SmurfForm} />
+          <Route path="/updateSmurf/:id" component={SmurfForm} />
 
         </div>
       </Router>
